@@ -51,7 +51,7 @@ int main() {
     int vet[size], counter = 0;
     
     for(int n = 0; n < size; n++){
-        vet[n] = rand() %10000;
+        vet[n] = rand() %100;
         printf("%d ", vet[n]);
         if(verifica_numero_perfeito(vet[n])){
             counter += 1;

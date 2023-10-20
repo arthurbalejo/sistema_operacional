@@ -37,7 +37,7 @@ int main(int argc, char* argv[]) {
 
     // Preenchendo o vetor com valores aleatórios entre 1 e 10.000
     for (int i = 0; i < tamanho_vetor; i++) {
-        vet[i] = rand() % 10000 + 1;
+        vet[i] = rand() % 100 + 1;
     }
 
     clock_t start_time = clock();
