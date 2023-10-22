@@ -2,16 +2,13 @@
 //soma de valor absuluto
 //funcao verifica se e negativo
 //funcao soma valores
+int valorAbsoluto(int n);
+int soma(int x, int y);
 
 int main(void){
-    int valorAbsoluto();
-    int soma();
-
     int x = 4, y = -2;
 
-    int soma = soma(x, y);
-
-    printf("O valor da soma dos numeros absolutos e:%i", soma);
+    printf("O valor da soma dos numeros absolutos e:%i\n", soma(x, y));
 
     return 0;
 }
@@ -27,8 +24,10 @@ int valorAbsoluto(int n){
 }
 
 int soma(int x, int y){
-    int soma;
-    soma = x + y;
+    
+    x = valorAbsoluto(x);
+    y = valorAbsoluto(y);
+    int soma = x + y;
 
     return soma;
 }
