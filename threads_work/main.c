@@ -3,19 +3,19 @@
 #include <time.h>
 #include <pthread.h>
 
-#define MAX_THREADS 4 // Número máximo de threads
+#define MAX_THREADS 4
 
 int verifica_numero_perfeito(int n) {
     if (n <= 1) {
-        return 0; // Números menores ou iguais a 1 não são perfeitos
+        return 0;
     }
 
-    int soma = 1; // Inicializado com 1 para incluir o próprio número como divisor
+    int soma = 1;
 
     for (int i = 2; i * i <= n; i++) {
         if (n % i == 0) {
             soma += i;
-            if (i != n / i) { // Verifica se não é a raiz quadrada para evitar contagem dupla
+            if (i != n / i) {
                 soma += n / i;
             }
         }
@@ -57,19 +57,20 @@ int main() {
         num_threads = 1;
     }
 
-    int vet[size], counter = 0;
+    int *vet = (int *)malloc(size * sizeof(int));
+    int counter = 0;
 
     for (int n = 0; n < size; n++) {
         vet[n] = rand() % 10;
     }
 
     pthread_t threads[MAX_THREADS];
-    int thread_data[MAX_THREADS][3]; // Armazena informações de cada thread
+    int thread_data[MAX_THREADS][3];
 
     for (int i = 0; i < num_threads; i++) {
-        thread_data[i][0] = i * (size / num_threads); // Início do subarray
-        thread_data[i][1] = (i == num_threads - 1) ? size : (i + 1) * (size / num_threads); // Fim do subarray
-        thread_data[i][2] = vet; // Ponteiro para o vetor
+        thread_data[i][0] = i * (size / num_threads);
+        thread_data[i][1] = (i == num_threads - 1) ? size : (i + 1) * (size / num_threads);
+        thread_data[i][2] = vet;
         pthread_create(&threads[i], NULL, verificar_perfeitos, (void *)thread_data[i]);
     }
 
@@ -79,10 +80,12 @@ int main() {
         for (int j = 0; j < thread_data[i][1] - thread_data[i][0]; j++) {
             printf("%d\n", thread_results[j]);
         }
+        int j = 0;
         counter += j;
         free(thread_results);
     }
 
+    free(vet); // Liberando a memória alocada para vet
     printf("Número de números perfeitos é: %d\n", counter);
 
     return 0;
